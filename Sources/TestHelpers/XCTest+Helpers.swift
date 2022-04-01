@@ -328,16 +328,21 @@ extension XCTestCase {
     /// may register blocks during -setUp, but you may *not* register blocks during -tearDown
     /// or from other teardown blocks.
     ///
+    /// - Note:
+    ///     Usage: ```
+    ///     addTearDownBlock {
+    /// 
+    ///       }
+    ///     ```
     /// - Parameters:
     ///     - object: an object to assert against
     ///     - onTeardown:  closure in which you should `nil` the given object
     public func XCTAssertNoMemoryLeak<T: AnyObject>(_ object: inout T!,
-                                                  onTeardown: @escaping () -> Void,
-                                                  file: StaticString = #filePath,
-                                                  line: UInt = #line) {
+                                                    file: StaticString = #filePath,
+                                                    line: UInt = #line) {
         weak var weakObject: T? = object
 
-        addTeardownBlock {
+
             // nil the object in the tear down closure
             onTeardown()
             XCTAssertNil(weakObject, "Potential memory leak found! 💥",

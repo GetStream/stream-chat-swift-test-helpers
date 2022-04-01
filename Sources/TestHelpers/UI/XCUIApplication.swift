@@ -7,7 +7,10 @@ import XCTest
 // MARK: XCUIApplication
 public extension XCUIApplication {
 
-    func waitForChangingState(from previousState: State, timeout: Double) -> Bool {
+    func waitForChangingState(
+            from previousState: State,
+            timeout: Double = XCUIElement.waitTimeout
+        ) -> Bool {
         let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
         var isChanged = (previousState != state)
         while !isChanged && endTime > Date().timeIntervalSince1970 * 1000 {
@@ -16,7 +19,7 @@ public extension XCUIApplication {
         return isChanged
     }
 
-    func waitForLosingFocus(timeout: Double) -> Bool {
+    func waitForLosingFocus(timeout: Double = XCUIElement.waitTimeout) -> Bool {
         sleep(UInt32(timeout))
         return !debugDescription.contains("subtree")
     }

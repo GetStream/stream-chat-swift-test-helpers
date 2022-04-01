@@ -6,7 +6,7 @@ import XCTest
 
 public extension XCUIElement {
 
-    static var waitTimeout: Double { 5.0 }
+    static var waitTimeout: Double { 10.0 }
 
     func dragAndDrop(dropElement: XCUIElement, duration: Double = 2) {
         press(forDuration: duration, thenDragTo: dropElement)
@@ -21,7 +21,7 @@ public extension XCUIElement {
     }
 
     func tapIfExists() {
-        if wait(timeout: 1.0) {
+        if waitForExistence(timeout: 1.0) {
             tap()
         }
     }
@@ -35,16 +35,16 @@ public extension XCUIElement {
 public extension XCUIElement {
 
     @discardableResult
-    func waitForLoss(timeout: Double) -> Bool {
+    func waitForLoss(timeout: Double = waitTimeout) -> Self {
         let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
         var elementPresent = exists
         while elementPresent && endTime > Date().timeIntervalSince1970 * 1000 {
             elementPresent = exists
         }
-        return !elementPresent
+        return self
     }
 
-    func waitForText(_ expectedText: String, timeout: Double) -> Bool {
+    func waitForText(_ expectedText: String, timeout: Double = waitTimeout) -> Self {
         let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
         var elementPresent = exists
         var textPresent = false
@@ -52,12 +52,13 @@ public extension XCUIElement {
             elementPresent = exists
             textPresent = (text == expectedText)
         }
-        return textPresent
+        return self
     }
 
     @discardableResult
-    func wait(timeout: Double = XCUIElement.waitTimeout) -> Bool {
-        waitForExistence(timeout: timeout)
+    func wait(timeout: Double = XCUIElement.waitTimeout) -> Self {
+         _ = waitForExistence(timeout: timeout)
+         return self
     }
 }
 

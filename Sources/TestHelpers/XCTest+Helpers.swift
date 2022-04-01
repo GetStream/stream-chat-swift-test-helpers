@@ -317,41 +317,6 @@ public func XCTAssertResultFailure<Value, U: Error, ErrorType: Error>(_ result: 
     }
 }
 
-extension XCTestCase {
-
-    /// Asserts if potential circular reference could be found.
-    /// Teardown blocks are executed after the current test method has returned but before
-    /// `tearDown` function is invoked.
-    ///
-    /// Registered blocks are run on the main thread but can be registered from any thread.
-    /// They are guaranteed to run only once, in LIFO order, and are executed serially. You
-    /// may register blocks during -setUp, but you may *not* register blocks during -tearDown
-    /// or from other teardown blocks.
-    ///
-    /// - Note:
-    ///     Usage: ```
-    ///     addTearDownBlock {
-    /// 
-    ///       }
-    ///     ```
-    /// - Parameters:
-    ///     - object: an object to assert against
-    ///     - onTeardown:  closure in which you should `nil` the given object
-    public func XCTAssertNoMemoryLeak<T: AnyObject>(_ object: inout T!,
-                                                    file: StaticString = #filePath,
-                                                    line: UInt = #line) {
-        weak var weakObject: T? = object
-
-
-            // nil the object in the tear down closure
-            onTeardown()
-            XCTAssertNil(weakObject, "Potential memory leak found! 💥",
-                        file: file,
-                        line: line)
-        }
-    }
-}
-
 /// Errors are compared through string reflection
 public extension Error {
     var stringReflection: String {

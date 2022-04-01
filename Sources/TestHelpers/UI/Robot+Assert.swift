@@ -131,7 +131,7 @@ public extension Robot {
                      count: Int,
                      file: StaticString = #filePath,
                      line: UInt = #line) -> Self {
-        let actualCount = query.waitCount(count, timeout: 5)
+        let actualCount = query.waitCount(count, timeout: 5).count
         let errorMessage = "Expected: \(count) messages, received: \(actualCount)"
         XCTAssertEqual(actualCount, count, errorMessage, file: file, line: line)
         return self

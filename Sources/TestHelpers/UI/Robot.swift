@@ -36,7 +36,7 @@ public extension Robot {
     /// - Returns: instance of `Robot`
     @discardableResult
     func tap(_ element: XCUIElement, file: StaticString = #filePath, line: UInt = #line) -> Self {
-        let existence = element.wait()
+        let existence = element.wait().exists
         XCTAssertTrue(existence, "Element \(element.label) doesn't exist", file: file, line: line)
         if element.isEnabled {
             element.tap()
@@ -52,7 +52,7 @@ public extension Robot {
     /// - Returns: instance of `Robot`
     @discardableResult
     func tapFrameCenter(_ element: XCUIElement, file: StaticString = #filePath, line: UInt = #line) -> Self {
-        let existence = element.wait()
+        let existence = element.wait().exists
         XCTAssertTrue(existence, "Element \(element.label) doesn't exist", file: file, line: line)
         element.tapFrameCenter()
         return self

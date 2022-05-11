@@ -44,13 +44,13 @@ public extension XCUIElement {
         return self
     }
 
-    func waitForText(_ expectedText: String, timeout: Double = waitTimeout) -> Self {
+    func waitForText(_ expectedText: String, timeout: Double = waitTimeout, mustBeEqual: Bool = true) -> Self {
         let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
         var elementPresent = exists
         var textPresent = false
         while !textPresent && elementPresent && endTime > Date().timeIntervalSince1970 * 1000 {
             elementPresent = exists
-            textPresent = (text == expectedText)
+            textPresent = mustBeEqual ? text == expectedText : text.contains(expectedText)
         }
         return self
     }

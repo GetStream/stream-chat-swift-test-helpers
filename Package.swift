@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "StreamChatTestHelpers",
+    platforms: [
+        .iOS(.v11), .macOS(.v10_15)
+    ],
     products: [
         .library(
             name: "StreamChatTestHelpers",

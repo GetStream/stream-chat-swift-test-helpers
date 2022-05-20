@@ -60,6 +60,15 @@ public extension XCUIElement {
          _ = waitForExistence(timeout: timeout)
          return self
     }
+    
+    func waitForHitPoint(isHittable: Bool = true, timeout: Double = waitTimeout) -> Self {
+        let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
+        var elementIsHittable = self.isHittable
+        while elementIsHittable != isHittable && endTime > Date().timeIntervalSince1970 * 1000 {
+            elementIsHittable = self.isHittable
+        }
+        return self
+    }
 }
 
 // MARK: Dimensions

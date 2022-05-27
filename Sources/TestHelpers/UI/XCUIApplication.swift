@@ -4,6 +4,9 @@
 
 import XCTest
 
+#if canImport(UIKit)
+import UIKit
+
 // MARK: XCUIApplication
 public extension XCUIApplication {
 
@@ -104,3 +107,4 @@ public extension XCUIApplication {
         down.press(forDuration: 0.1, thenDragTo: up)
     }
 }
+#endif

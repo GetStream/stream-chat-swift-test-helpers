@@ -6,15 +6,15 @@ import PackageDescription
 let package = Package(
     name: "StreamChatTestHelpers",
     platforms: [
-        .iOS(.v11), .macOS(.v10_15)
+        .iOS(.v11), .macOS("11.0")
     ],
     products: [
         .library(
             name: "StreamChatTestHelpers",
             targets: ["StreamChatTestHelpers"]),
         .library(
-            name: "StreamChatMockServer",
-            targets: ["StreamChatMockServer"])
+            name: "MockServer",
+            targets: ["MockServer"])
     ],
     dependencies: [
         .package(name: "Difference", url: "https://github.com/krzysztofzablocki/Difference.git", .exact("1.0.1")),
@@ -27,7 +27,7 @@ let package = Package(
                 .product(name: "Difference", package: "Difference")
             ],
             path: "Sources/TestHelpers"),
-        .target(name: "StreamChatMockServer",
+        .target(name: "MockServer",
                 dependencies: [
                     .product(name: "Swifter", package: "Swifter"),
                     .target(name: "StreamChatTestHelpers")

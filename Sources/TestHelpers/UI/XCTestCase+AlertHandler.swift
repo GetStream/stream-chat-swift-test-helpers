@@ -98,7 +98,7 @@ public extension XCUIApplication {
         guard alert.exists else { return false }
 
         let label = resource.label(for: resolution)
-        alert.buttons[label].tap()
+        alert.buttons[label].safeTap()
         return true
     }
 
@@ -184,7 +184,7 @@ public extension XCTestCase {
         }
 
         let label = resource.label(for: resolution)
-        alert.buttons[label].tap()
+        alert.buttons[label].safeTap()
 
         /// Hi, I'm a UI Interruption handler and i need a nap AFTER handling an alert.
         /// Removing this will introduce flakiness to alert handling, do it at your own risk.

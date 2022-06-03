@@ -19,9 +19,9 @@ public extension String {
     }
     
     var html: Self {
-        "<p>\(self)</p>\n"
+        self.isEmpty ? "" : "<p>\(self)</p>\n"
     }
-    
+
 }
 
 public extension Substring {

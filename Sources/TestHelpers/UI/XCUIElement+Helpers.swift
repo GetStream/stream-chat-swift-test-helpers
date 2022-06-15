@@ -19,6 +19,14 @@ public extension XCUIElement {
             coordinate.tap()
         } else { tap() }
     }
+    
+    func safePress(forDuration duration: TimeInterval) {
+        if !isHittable {
+            let coordinate: XCUICoordinate =
+                coordinate(withNormalizedOffset: CGVector(dx: 0.0, dy: 0.0))
+            coordinate.press(forDuration: duration)
+        } else { press(forDuration: duration) }
+    }
 
     func tapIfExists() {
         if waitForExistence(timeout: 1.0) {

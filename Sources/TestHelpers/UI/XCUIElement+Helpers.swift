@@ -43,7 +43,7 @@ public extension XCUIElement {
 public extension XCUIElement {
 
     @discardableResult
-    func waitForLoss(timeout: Double = waitTimeout) -> Self {
+    func waitForDisappearance(timeout: Double = waitTimeout) -> Self {
         let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
         var elementPresent = exists
         while elementPresent && endTime > Date().timeIntervalSince1970 * 1000 {

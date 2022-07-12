@@ -6,7 +6,7 @@ import XCTest
 
 public extension XCUIElement {
 
-    static var waitTimeout: Double { 10.0 }
+    static var waitTimeout: Double { 5.0 }
 
     func dragAndDrop(dropElement: XCUIElement, duration: Double = 2) {
         press(forDuration: duration, thenDragTo: dropElement)
@@ -19,7 +19,7 @@ public extension XCUIElement {
             coordinate.tap()
         } else { tap() }
     }
-    
+
     func safePress(forDuration duration: TimeInterval) {
         if !isHittable {
             let coordinate: XCUICoordinate =
@@ -68,7 +68,7 @@ public extension XCUIElement {
          _ = waitForExistence(timeout: timeout)
          return self
     }
-    
+
     func waitForHitPoint(isHittable: Bool = true, timeout: Double = waitTimeout) -> Self {
         let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
         var elementIsHittable = self.isHittable

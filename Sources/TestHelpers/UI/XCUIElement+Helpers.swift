@@ -62,6 +62,15 @@ public extension XCUIElement {
         }
         return self
     }
+    
+    func waitForTextDisappearance(_ oldText: String, timeout: Double = waitTimeout) -> Self {
+        let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
+        var textNotUpdated = true
+        while textNotUpdated && endTime > Date().timeIntervalSince1970 * 1000 {
+            textNotUpdated = text == oldText
+        }
+        return self
+    }
 
     @discardableResult
     func wait(timeout: Double = XCUIElement.waitTimeout) -> Self {

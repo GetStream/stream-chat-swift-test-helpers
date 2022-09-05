@@ -31,9 +31,14 @@ public extension XCUIApplication {
         UIPasteboard.general.string = text
     }
 
-    func bundleId() -> String {
+    func testBundleId() -> String {
         Bundle.main.bundleIdentifier ?? ""
     }
+    
+    func bundleId() -> String {
+        String(description.split(separator: "'")[1])
+    }
+    
 }
 
 // MARK: Gestures

@@ -53,7 +53,7 @@ public func waitFor<T>(
     case .completed where result != nil:
         return result!
     default:
-        XCTFail("Waiting for the result timed out", file: file, line: line)
+        XCTFail("Waiting for the result timed out after \(timeout)", file: file, line: line)
         throw WaiterError.waitingForResultTimedOut
     }
 }

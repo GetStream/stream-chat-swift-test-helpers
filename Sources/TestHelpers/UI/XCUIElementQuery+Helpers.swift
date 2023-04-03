@@ -35,11 +35,13 @@ public extension XCUIElementQuery {
     }
 
     @discardableResult
-    func waitCount(_ expectedCount: Int, timeout: Double = XCUIElement.waitTimeout) -> Self {
+    func waitCount(_ expectedCount: Int, timeout: Double = XCUIElement.waitTimeout, exact: Bool = false) -> Self {
         let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
         var actualCount = count
-        while actualCount < expectedCount && endTime > Date().timeIntervalSince1970 * 1000 {
+        var condition = true
+        while condition && endTime > Date().timeIntervalSince1970 * 1000 {
             actualCount = count
+            condition = exact ? actualCount != expectedCount : actualCount < expectedCount
         }
         return self
     }

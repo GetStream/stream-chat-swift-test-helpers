@@ -72,6 +72,17 @@ public extension XCUIElement {
         return self
     }
 
+    func waitForValue(_ expectedValue: String, timeout: Double = waitTimeout) -> Self {
+        let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
+        var elementPresent = exists
+        var valuePresent = false
+        while !valuePresent && elementPresent && endTime > Date().timeIntervalSince1970 * 1000 {
+            elementPresent = exists
+            valuePresent = value as? String == expectedValue
+        }
+        return self
+    }
+
     @discardableResult
     func wait(timeout: Double = XCUIElement.waitTimeout) -> Self {
          _ = waitForExistence(timeout: timeout)

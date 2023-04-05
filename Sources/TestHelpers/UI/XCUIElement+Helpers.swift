@@ -54,11 +54,11 @@ public extension XCUIElement {
 
     func waitForText(_ expectedText: String, timeout: Double = waitTimeout, mustBeEqual: Bool = true) -> Self {
         let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
-        var elementPresent = exists
         var textPresent = false
-        while !textPresent && elementPresent && endTime > Date().timeIntervalSince1970 * 1000 {
-            elementPresent = exists
-            textPresent = mustBeEqual ? text == expectedText : text.contains(expectedText)
+        while !textPresent && endTime > Date().timeIntervalSince1970 * 1000 {
+            if exists {
+                textPresent = mustBeEqual ? text == expectedText : text.contains(expectedText)
+            }
         }
         return self
     }
@@ -67,18 +67,20 @@ public extension XCUIElement {
         let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
         var textNotUpdated = true
         while textNotUpdated && endTime > Date().timeIntervalSince1970 * 1000 {
-            textNotUpdated = text == oldText
+            if exists {
+                textNotUpdated = text == oldText
+            }
         }
         return self
     }
 
     func waitForValue(_ expectedValue: String, timeout: Double = waitTimeout) -> Self {
         let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
-        var elementPresent = exists
-        var valuePresent = false
-        while !valuePresent && elementPresent && endTime > Date().timeIntervalSince1970 * 1000 {
-            elementPresent = exists
-            valuePresent = value as? String == expectedValue
+        var isExpectedValue = false
+        while !isExpectedValue && endTime > Date().timeIntervalSince1970 * 1000 {
+            if exists {
+              isExpectedValue = (value as? String) == expectedValue
+            }
         }
         return self
     }

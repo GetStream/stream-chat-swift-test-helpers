@@ -76,12 +76,12 @@ public extension XCUIElement {
         return self
     }
 
-    func waitForValue(_ expectedValue: String, timeout: Double = waitTimeout) -> Self {
+    func waitForValue(_ expectedValue: String, timeout: Double = waitTimeout, mustBeEqual: Bool = true) -> Self {
         let endTime = Date().timeIntervalSince1970 * 1000 + timeout * 1000
         var isExpectedValue = false
         while !isExpectedValue && endTime > Date().timeIntervalSince1970 * 1000 {
-            if exists {
-              isExpectedValue = (value as? String) == expectedValue
+            if exists, let actualValue = value as? String {
+                isExpectedValue = mustBeEqual ? actualValue == expectedValue : actualValue.contains(expectedValue)
             }
         }
         return self

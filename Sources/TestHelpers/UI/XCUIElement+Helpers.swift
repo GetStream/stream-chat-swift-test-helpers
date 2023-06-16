@@ -9,8 +9,8 @@ public extension XCUIElement {
     static var waitTimeout: Double { 5.0 }
 
     func dragAndDrop(dropElement: XCUIElement, duration: Double = 2) {
-        let startCoordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: CGVector(dx: 0.0, dy: 0.0))
-        let endCoordinate: XCUICoordinate = dropElement.coordinate(withNormalizedOffset: CGVector(dx: 0.0, dy: 0.0))
+        let startCoordinate: XCUICoordinate = self.frameCenter
+        let endCoordinate: XCUICoordinate = dropElement.frameCenter
         startCoordinate.press(forDuration: duration, thenDragTo: endCoordinate)
     }
 
@@ -118,7 +118,7 @@ public extension XCUIElement {
         Double(frame.size.width)
     }
 
-    private var frameCenter: XCUICoordinate {
+    var frameCenter: XCUICoordinate {
         let centerX = frame.midX
         let centerY = frame.midY
 

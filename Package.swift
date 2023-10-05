@@ -4,34 +4,28 @@
 import PackageDescription
 
 let package = Package(
-    name: "StreamChatTestHelpers",
+    name: "StreamSwiftTestHelpers",
     platforms: [
-        .iOS(.v11), .macOS(.v10_15)
+        .iOS(.v12), .macOS(.v10_15)
     ],
     products: [
         .library(
-            name: "StreamChatTestHelpers",
-            targets: ["StreamChatTestHelpers"]),
-        .library(
-            name: "MockServer",
-            targets: ["MockServer"])
+            name: "StreamSwiftTestHelpers",
+            targets: ["StreamSwiftTestHelpers"]
+        )
     ],
     dependencies: [
         .package(name: "Difference", url: "https://github.com/krzysztofzablocki/Difference.git", .exact("1.0.1")),
-        .package(name: "Swifter", url: "https://github.com/httpswift/swifter", .exact("1.5.0"))
+        .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing", .exact("1.11.1"))
     ],
     targets: [
         .target(
-            name: "StreamChatTestHelpers",
+            name: "StreamSwiftTestHelpers",
             dependencies: [
-                .product(name: "Difference", package: "Difference")
+                .product(name: "Difference", package: "Difference"),
+                .product(name: "SnapshotTesting", package: "SnapshotTesting")
             ],
-            path: "Sources/TestHelpers"),
-        .target(name: "MockServer",
-                dependencies: [
-                    .product(name: "Swifter", package: "Swifter"),
-                    .target(name: "StreamChatTestHelpers")
-                ],
-                path: "Sources/MockServer")
+            path: "Sources/TestHelpers"
+        )
     ]
 )

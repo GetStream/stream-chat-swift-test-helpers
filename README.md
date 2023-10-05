@@ -1,4 +1,4 @@
-# stream-chat-swift-test-helpers
+# stream-swift-test-helpers
 Test Helpers used by Stream iOS SDKs for testing purposes. Written in Swift.
 
 ## Pre-requisities
@@ -10,24 +10,24 @@ In order to use this `Swift Package`, you'll need:
 ## Installation Guide
 1. Setup your GitHub account in Xcode 11 (and above) under _Preferences-Accounts_
 
-2. Add this repo to your Xcode project `https://github.com/GetStream/stream-chat-swift-test-helpers.git`
+2. Add this repo to your Xcode project `https://github.com/GetStream/stream-swift-test-helpers.git`
 
-3. Add `StreamChatTestHelpers` package to your project's test target as Swift Package Dependency.
+3. Add `StreamSwiftTestHelpers` package to your project's test target as Swift Package Dependency.
 
 4. Once correctly added, you should see it in the Project Navigator pane under Swift Package dependencies
 
-5. Start using the `StreamChatTestHelpers` by importing them in your test files: `import StreamChatTestHelpers`, or `@_exported import StreamChatTestHelpers` to make it accessible target-wise.
+5. Start using the `StreamSwiftTestHelpers` by importing them in your test files: `import StreamSwiftTestHelpers`, or `@_exported import StreamSwiftTestHelpers` to make it accessible target-wise.
 ---
 
 ## 3rd party Dependencies
 This package depends on [Difference](https://github.com/krzysztofzablocki/Difference) Swift package, that brings better way to identify what's different between 2 instances.
 ![TestHelpers](./resources/difference.png).
 
-Mock server depends on [Swifter](https://github.com/httpswift/swifter) - a tiny HTTP server engine.
+This package also depends on [SnapshotTesting](https://github.com/pointfreeco/swift-snapshot-testing) Swift package, that allows to create snapshot tests.
 
 # Usage
 
-## StreamChatTestHelpers - Unit tests
+## StreamSwiftTestHelpers - Unit tests
 
 ### Testing Result type
 ```swift
@@ -186,7 +186,7 @@ func testFailureResult() {
 }
 ```
 
-## StreamChatTestHelpers - UI tests
+## StreamSwiftTestHelpers - UI tests
 
 This package provides support for writing UI tests, accessing UI elements and running actions & gestures on them.
 
@@ -207,7 +207,7 @@ Example:
 func testReceiveMessage() throws {
     let message = "test message"
     let author = "Han Solo"
-    
+
     GIVEN("user opens the channel") {
         userRobot.login().openChannel()
     }

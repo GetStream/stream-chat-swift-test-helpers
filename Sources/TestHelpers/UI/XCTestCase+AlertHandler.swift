@@ -64,6 +64,7 @@ public enum Permission {
             }
         }
 
+        @available(macOS 10.15.4, *)
         @available(iOS 13.4, *)
         var resource: XCUIProtectedResource? {
             switch self {
@@ -102,6 +103,7 @@ public extension XCUIApplication {
         return true
     }
 
+    @available(macOS 10.15.4, *)
     @available(iOS 13.4, *)
     func resetAuthorizationStatus(resource: Permission.Resource) {
         guard let protectedResource = resource.resource else { return }

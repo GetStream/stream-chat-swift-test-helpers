@@ -7,13 +7,13 @@ import SwiftUI
 import XCTest
 
 /// Set this property true, to easily re-record all snapshots.
-let overrideRecording: Bool? = nil
+var overrideRecording: Bool? = nil
 
 /// The percentage a pixel must match the source pixel to be considered a match.
-let precision: Float = 0.96
+var precision: Float = 0.96
 
 /// The default view controller size. Simulates an iPhone in portrait mode.
-let defaultScreenSize = CGSize(width: 360, height: 700)
+var defaultScreenSize = CGSize(width: 360, height: 700)
 
 /// Snapshot of a view controller. All variants will be tested by default. For each variant, it will take a snapshot.
 /// It is recommended to test all trait variants only for view controllers, and for small view components only test

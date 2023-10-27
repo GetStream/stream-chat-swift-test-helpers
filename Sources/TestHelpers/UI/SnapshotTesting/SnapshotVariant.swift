@@ -8,61 +8,61 @@ import XCTest
 
 /// A Snapshot Variant is a combination of SnapshotTraits,
 /// that will result in a snapshot test with multiple UITraitCollection's.
-struct SnapshotVariant {
-    let snapshotTraits: [SnapshotTrait]
-    var snapshotName: String {
+public struct SnapshotVariant {
+    public let snapshotTraits: [SnapshotTrait]
+    public var snapshotName: String {
         snapshotTraits.map(\.name).joined(separator: ".")
     }
 
-    var traits: UITraitCollection {
+    public var traits: UITraitCollection {
         UITraitCollection(traitsFrom: [UITraitCollection(displayScale: 1)] + snapshotTraits.map(\.trait))
     }
 }
 
 /// A Snapshot Trait is usually just a combination of a UITraitCollection and it's name.
-struct SnapshotTrait {
-    let name: String
-    let trait: UITraitCollection
+public struct SnapshotTrait {
+    public let name: String
+    public let trait: UITraitCollection
 }
 
-extension SnapshotVariant {
+public extension SnapshotVariant {
     // MARK: - Combinations
 
-    static let all: [SnapshotVariant] = {
+    public static let all: [SnapshotVariant] = {
         [smallDark, defaultLight, extraExtraExtraLargeLight, rightToLeftLayout]
     }()
 
-    static let onlyUserInterfaceStyles: [SnapshotVariant] = {
+    public static let onlyUserInterfaceStyles: [SnapshotVariant] = {
         [defaultLight, defaultDark]
     }()
 
     // MARK: - Variants
 
-    static let extraExtraExtraLargeLight: SnapshotVariant = {
+    public static let extraExtraExtraLargeLight: SnapshotVariant = {
         var traits = [extraExtraExtraLargeTrait]
         traits.append(lightTrait)
         return SnapshotVariant(snapshotTraits: traits)
     }()
 
-    static let defaultDark: SnapshotVariant = {
+    public static let defaultDark: SnapshotVariant = {
         var traits = [defaultTrait]
         traits.append(darkTrait)
         return SnapshotVariant(snapshotTraits: traits)
     }()
 
-    static let defaultLight: SnapshotVariant = {
+    public static let defaultLight: SnapshotVariant = {
         var traits = [defaultTrait]
         traits.append(lightTrait)
         return SnapshotVariant(snapshotTraits: traits)
     }()
 
-    static let smallDark: SnapshotVariant = {
+    public static let smallDark: SnapshotVariant = {
         var traits = [smallTrait]
         traits.append(darkTrait)
         return SnapshotVariant(snapshotTraits: traits)
     }()
 
-    static let rightToLeftLayout = SnapshotVariant(snapshotTraits: [rightToLeftLayoutTrait, defaultTrait])
+    public static let rightToLeftLayout = SnapshotVariant(snapshotTraits: [rightToLeftLayoutTrait, defaultTrait])
 
     // MARK: - Traits
 
@@ -94,12 +94,12 @@ extension SnapshotVariant {
     )
 }
 
-extension Array where Element == SnapshotVariant {
-    static let all: [SnapshotVariant] = {
+public extension Array where Element == SnapshotVariant {
+    public static let all: [SnapshotVariant] = {
         SnapshotVariant.all
     }()
 
-    static let onlyUserInterfaceStyles: [SnapshotVariant] = {
+    public static let onlyUserInterfaceStyles: [SnapshotVariant] = {
         SnapshotVariant.onlyUserInterfaceStyles
     }()
 }

@@ -7,13 +7,13 @@ import SwiftUI
 import XCTest
 
 /// Set this property true, to easily re-record all snapshots.
-var overrideRecording: Bool? = nil
+public var overrideRecording: Bool? = nil
 
 /// The percentage a pixel must match the source pixel to be considered a match.
-var precision: Float = 0.96
+public var precision: Float = 0.96
 
 /// The default view controller size. Simulates an iPhone in portrait mode.
-var defaultScreenSize = CGSize(width: 360, height: 700)
+public var defaultScreenSize = CGSize(width: 360, height: 700)
 
 /// Snapshot of a view controller. All variants will be tested by default. For each variant, it will take a snapshot.
 /// It is recommended to test all trait variants only for view controllers, and for small view components only test
@@ -29,7 +29,7 @@ var defaultScreenSize = CGSize(width: 360, height: 700)
 ///   to the name of the snapshot image file to uniquely identify it.
 ///   - record: True if a new reference should be saved. False by default,
 ///   so that the newly captured snapshot is compared with the current reference.
-func AssertSnapshot(
+public func AssertSnapshot(
     _ vc: UIViewController,
     isEmbeddedInNavigationController: Bool = false,
     variants: [SnapshotVariant] = SnapshotVariant.all,
@@ -67,7 +67,7 @@ func AssertSnapshot(
 ///   to the name of the snapshot image file to uniquely identify it.
 ///   - record: True if a new reference should be saved. False by default,
 ///   so that the newly captured snapshot is compared with the current reference.
-func AssertSnapshot(
+public func AssertSnapshot(
     _ view: UIView,
     variants: [SnapshotVariant] = SnapshotVariant.all,
     size: CGSize? = nil,
@@ -95,7 +95,7 @@ func AssertSnapshot(
 @available(iOS 13.0, *)
 /// Snapshot of a UIViewControllerRepresentable. All variants will be tested by default. For each variant, it will take a snapshot.
 /// This uses the default view controller screen size.
-func AssertSnapshot<View: UIViewControllerRepresentable>(
+public func AssertSnapshot<View: UIViewControllerRepresentable>(
     _ view: View,
     isEmbeddedInNavigationController: Bool = false,
     variants: [SnapshotVariant] = SnapshotVariant.all,
@@ -133,7 +133,7 @@ func AssertSnapshot<View: UIViewControllerRepresentable>(
 ///   to the name of the snapshot image file to uniquely identify it.
 ///   - record: True if a new reference should be saved. False by default,
 ///   so that the newly captured snapshot is compared with the current reference.
-func AssertSnapshot<View: SwiftUI.View>(
+public func AssertSnapshot<View: SwiftUI.View>(
     _ view: View,
     variants: [SnapshotVariant] = SnapshotVariant.all,
     device: ViewImageConfig = .iPhoneX,
@@ -160,10 +160,10 @@ func AssertSnapshot<View: SwiftUI.View>(
 
 /// A wrapper view that renders the content in its ideal size
 @available(iOS 13, *)
-struct SnapshotContainer<Content: View>: View {
-    let content: Content
+public struct SnapshotContainer<Content: View>: View {
+    public let content: Content
 
-    var body: some View {
+    public var body: some View {
         VStack {
             Spacer()
             HStack {

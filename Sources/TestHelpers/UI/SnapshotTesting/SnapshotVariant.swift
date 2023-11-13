@@ -28,78 +28,80 @@ public struct SnapshotTrait {
 public extension SnapshotVariant {
     // MARK: - Combinations
 
-    public static let all: [SnapshotVariant] = {
+    static let all: [SnapshotVariant] = {
         [smallDark, defaultLight, extraExtraExtraLargeLight, rightToLeftLayout]
     }()
 
-    public static let onlyUserInterfaceStyles: [SnapshotVariant] = {
+    static let onlyUserInterfaceStyles: [SnapshotVariant] = {
         [defaultLight, defaultDark]
     }()
 
     // MARK: - Variants
 
-    public static let extraExtraExtraLargeLight: SnapshotVariant = {
+    static let extraExtraExtraLargeLight: SnapshotVariant = {
         var traits = [extraExtraExtraLargeTrait]
         traits.append(lightTrait)
         return SnapshotVariant(snapshotTraits: traits)
     }()
 
-    public static let defaultDark: SnapshotVariant = {
+    static let defaultDark: SnapshotVariant = {
         var traits = [defaultTrait]
         traits.append(darkTrait)
         return SnapshotVariant(snapshotTraits: traits)
     }()
 
-    public static let defaultLight: SnapshotVariant = {
+    static let defaultLight: SnapshotVariant = {
         var traits = [defaultTrait]
         traits.append(lightTrait)
         return SnapshotVariant(snapshotTraits: traits)
     }()
 
-    public static let smallDark: SnapshotVariant = {
+    static let smallDark: SnapshotVariant = {
         var traits = [smallTrait]
         traits.append(darkTrait)
         return SnapshotVariant(snapshotTraits: traits)
     }()
 
-    public static let rightToLeftLayout = SnapshotVariant(snapshotTraits: [rightToLeftLayoutTrait, defaultTrait])
+    static let rightToLeftLayout = SnapshotVariant(snapshotTraits: [rightToLeftLayoutTrait, defaultTrait])
 
     // MARK: - Traits
 
-    private static let extraExtraExtraLargeTrait = SnapshotTrait(
+    static let extraExtraExtraLargeTrait = SnapshotTrait(
         name: "extraExtraExtraLarge",
         trait: UITraitCollection(preferredContentSizeCategory: .extraExtraExtraLarge)
     )
-    private static let defaultTrait = SnapshotTrait(
+    
+    static let defaultTrait = SnapshotTrait(
         name: "default",
         trait: UITraitCollection(preferredContentSizeCategory: .large)
     )
-    private static let smallTrait = SnapshotTrait(
+    
+    static let smallTrait = SnapshotTrait(
         name: "small",
         trait: UITraitCollection(preferredContentSizeCategory: .small)
     )
 
-    private static let lightTrait = SnapshotTrait(
+    static let lightTrait = SnapshotTrait(
         name: "light",
         trait: UITraitCollection(userInterfaceStyle: .light)
     )
 
-    private static let darkTrait = SnapshotTrait(
+    static let darkTrait = SnapshotTrait(
         name: "dark",
         trait: UITraitCollection(userInterfaceStyle: .dark)
     )
 
-    private static let rightToLeftLayoutTrait = SnapshotTrait(
+    static let rightToLeftLayoutTrait = SnapshotTrait(
         name: "rightToLeftLayout", trait: .init(layoutDirection: .rightToLeft)
     )
 }
 
 public extension Array where Element == SnapshotVariant {
-    public static let all: [SnapshotVariant] = {
+    static let all: [SnapshotVariant] = {
         SnapshotVariant.all
     }()
 
-    public static let onlyUserInterfaceStyles: [SnapshotVariant] = {
+    static let onlyUserInterfaceStyles: [SnapshotVariant] = {
         SnapshotVariant.onlyUserInterfaceStyles
     }()
 }
